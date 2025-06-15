@@ -51,7 +51,6 @@ export const CreateTaskForm = () => {
                 <CardContent>
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                            {/* Title Field */}
                             <FormField
                                 control={form.control}
                                 name="title"
@@ -91,7 +90,6 @@ export const CreateTaskForm = () => {
                             />
 
                             <div className="grid grid-cols-2 gap-4">
-                                {/* Due Date Field */}
                                 <FormField
                                     control={form.control}
                                     name="due_date"

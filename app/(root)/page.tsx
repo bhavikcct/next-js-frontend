@@ -1,8 +1,6 @@
 import { TaskList } from "@/components/task-list";
 import { Button } from "@/components/ui/button";
 import { getTasks } from "@/http/tasks";
-import { Task } from "@/types/tasks.type";
-import axios from "axios";
 import { headers } from "next/headers";
 import Link from "next/link";
 

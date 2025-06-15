@@ -1,10 +1,23 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧭 Next.js 15 Task Management App
 
-## Getting Started
+This is a modern **Task Management App** built with [Next.js 15](https://nextjs.org), utilizing **SSR**, **React Query (TanStack Query)** for data mutation/fetching, **ShadCN UI** for beautiful components, and a structured **HTTP service layer** for API handling.
 
-First, run the development server:
+---
+
+## 🚀 Getting Started
+
+### 1. Install dependencies
 
 ```bash
+npm install
+# or
+yarn
+# or
+pnpm install
+# or
+bun install
+
+2. Run the development server
 npm run dev
 # or
 yarn dev
@@ -12,25 +25,63 @@ yarn dev
 pnpm dev
 # or
 bun dev
-```
+Then open http://localhost:3000 in your browser to view the app.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Features
+✅ Built with Next.js 15 App Router
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+✅ Uses Server-Side Rendering (SSR) for authenticated task data
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+✅ API calls handled via a clean HTTP service layer (/http)
 
-## Learn More
+✅ State/data management using @tanstack/react-query
 
-To learn more about Next.js, take a look at the following resources:
+✅ Beautiful and accessible components via ShadCN UI
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+✅ Modular structure: components/, schema/, lib/, types/, http/, etc.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+✅ Form validation with Zod + React Hook Form
 
-## Deploy on Vercel
+✅ Optimistic UI, loading states, and toast notifications
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+✅ Middleware-based route protection
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+🧱 Project Structure
+app/
+  └── layout.tsx         # Shared layout
+  └── page.tsx           # Home page with task list
+
+components/
+  ├── task-list.tsx      # Task table component
+  ├── create-task-form.tsx
+  ├── edit-task-form.tsx
+  └── ui/                # ShadCN UI components
+
+http/
+  └── tasks.ts           # All HTTP requests related to tasks
+
+schema/
+  └── task.ts            # Zod schemas for task forms
+
+lib/
+  ├── api-endpoint.ts    # Centralized endpoint constants
+  └── api.ts             # Axios instance config
+
+types/
+  └── tasks.type.ts      # TypeScript types for tasks
+
+middleware.ts            # Auth guard using Next.js Middleware
+
+🧪 Tech Stack
+Tech	Description
+Next.js 15	React framework with App Router, SSR, routing
+@tanstack/react-query	Data fetching & mutation hooks
+ShadCN UI	Beautiful UI components with Tailwind CSS
+Axios	HTTP client with interceptors
+Zod	Schema validation with typesafety
+React Hook Form	Easy and performant form management
+Next Auth / JWT	(Optional) For cookie-based route protection
+
+🛡 Middleware Protection
+Routes like /, /task/* are protected using middleware.ts. If a valid JWT cookie is not present, the user will be redirected to /login.
+
