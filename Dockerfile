@@ -11,4 +11,4 @@ EXPOSE 5001
 
 ENV PORT=5001
 
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "dev"]

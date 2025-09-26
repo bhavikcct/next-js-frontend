@@ -13,5 +13,5 @@ services:
       - .:/app          
     stdin_open: true
     tty: true
-    command: npm run start
+    command: npm run dev
     restart: unless-stopped

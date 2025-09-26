@@ -9,6 +9,7 @@ import { Product } from "@/types/products.type";
 import axios from "axios";
 import { toast } from "sonner";
 
+
 export async function getAllProducts(
   requestHeaders: Headers
 ): Promise<Product[]> {
@@ -17,17 +18,19 @@ export async function getAllProducts(
 
     console.log(cookie, "cookie");
 
-    const apiWithCookies = axios.create({
+    const apiWithCookies =  axios.create({
       baseURL: BASE_URL.NEXT_PUBLIC_API_URI,
       headers: {
         cookie,
       },
     });
-    // console.log(apiWithCookies, "apiWithCookies");
+
+    console.log(apiWithCookies, "apiWithCookies");
 
     const response = await apiWithCookies.get<Product[]>(
       API_ENDPOINTS.getallproducts
     );
+    // console.log(response,"response");
     return response.data;
   } catch (error: any) {
     console.log(error, "error");
