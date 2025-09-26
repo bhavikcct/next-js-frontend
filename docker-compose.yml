@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  nextjs-app:
+    build: .
+    container_name: nextjs-app
+    ports:
+      - "5001:5001"
+    environment:
+      NODE_ENV: development
+      PORT: 5001
+    volumes:
+      - .:/app          
+    stdin_open: true
+    tty: true
+    command: npm run dev
+    restart: unless-stopped

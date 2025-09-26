@@ -2,22 +2,24 @@
 
 import { Edit, Trash } from "lucide-react"
 import { Button } from "./ui/button"
-import { Task } from "@/types/tasks.type"
 import Link from "next/link"
 import { useState } from "react"
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog"
-import { deletetask } from "@/http/tasks"
 import { useRouter } from "next/navigation"
 import { useMutation } from "@tanstack/react-query"
 import { API_ENDPOINTS } from "@/lib/api-endpoint"
+import { Product } from "@/types/products.type"
+import { deleteProduct } from "@/http/products"
 
 
-export const TaskListActions = ({ task }: { task: Task }) => {
+
+
+export const ProductListActions = ({ task }: { task: Product }) => {
     const [open, setOpen] = useState(false);
     const router = useRouter()
 
     const { isPending, mutateAsync } = useMutation({
-        mutationFn: deletetask,
+        mutationFn: deleteProduct,
         onSuccess: () => {
             router.refresh()
             setOpen(false)
@@ -28,7 +30,7 @@ export const TaskListActions = ({ task }: { task: Task }) => {
 
     const handleDelete = async () => {
         await mutateAsync({
-            queryKey: [API_ENDPOINTS.deletetask(String(task.id))]
+            queryKey: [API_ENDPOINTS.deleteproduct(String(task.id))]
         })
 
     }

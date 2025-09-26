@@ -1,10 +1,10 @@
 export const API_ENDPOINTS = {
     register: "/auth/register",
     login: '/auth/login',
-    getalltasks: '/tasks',
-    createtask: '/tasks',
-    gettaskbyid: (id: string) => `/tasks/${id}`,
+    getallproducts: '/products',
+    createproduct: '/products',
+    getproductbyid: (id: string) => `/products/${id}`,
 
-    edittask: (id: string) => `/tasks/${id}`,
-    deletetask: (id: string) => `/tasks/${id}`,
+    editproduct: (id: string) => `/products/${id}`,
+    deleteproduct: (id: string) => `/products/${id}`,
 }

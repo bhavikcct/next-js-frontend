@@ -6,7 +6,7 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   const isProtectedRoute =
-    pathname === '/' || pathname.startsWith('/task');
+    pathname === '/' || pathname.startsWith('/product');
 
   const isAuthRoute =
     pathname === '/login' || pathname === '/register';
@@ -23,5 +23,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/', '/task/:path*', '/login', '/register'],
+  matcher: ['/', '/product/:path*', '/login', '/register'],
 };
