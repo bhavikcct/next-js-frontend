@@ -15,7 +15,7 @@ import { Input } from "./ui/input";
 import { Loader } from "lucide-react";
 import { Button } from "./ui/button";
 import { useMutation } from "@tanstack/react-query";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"; 
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { API_ENDPOINTS } from "@/lib/api-endpoint";
 import { useRouter } from "next/navigation";
 import { createProduct } from "@/http/products";
@@ -26,7 +26,7 @@ export const CreateProductForm = () => {
   const form = useForm<CreateProductFormValues>({
     resolver: zodResolver(createproductSchema),
     defaultValues: {
-      name: "",
+      productName: "",
       price: 0,
       description: "",
     },
@@ -58,7 +58,7 @@ export const CreateProductForm = () => {
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               <FormField
                 control={form.control}
-                name="name"
+                name="productName"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Product Name</FormLabel>
@@ -67,7 +67,7 @@ export const CreateProductForm = () => {
                         placeholder="Product Name"
                         {...field}
                         aria-invalid={
-                          form.formState.errors.name ? "true" : "false"
+                          form.formState.errors.productName ? "true" : "false"
                         }
                       />
                     </FormControl>

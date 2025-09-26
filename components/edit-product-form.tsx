@@ -28,7 +28,7 @@ export const EditProductForm = ({ task }: { task: Product }) => {
     defaultValues: {
       description: task.description,
       price: task.price,
-      name: task.name,
+      productName: task.name,
     },
   });
 
@@ -58,7 +58,7 @@ export const EditProductForm = ({ task }: { task: Product }) => {
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               <FormField
                 control={form.control}
-                name="name"
+                name="productName"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Product Name</FormLabel>
@@ -67,7 +67,7 @@ export const EditProductForm = ({ task }: { task: Product }) => {
                         placeholder="Task Title"
                         {...field}
                         aria-invalid={
-                          form.formState.errors.name ? "true" : "false"
+                          form.formState.errors.productName ? "true" : "false"
                         }
                       />
                     </FormControl>

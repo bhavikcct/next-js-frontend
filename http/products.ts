@@ -15,12 +15,15 @@ export async function getAllProducts(
   try {
     const cookie = requestHeaders.get("cookie") || "";
 
+    console.log(cookie, "cookie");
+
     const apiWithCookies = axios.create({
       baseURL: BASE_URL.NEXT_PUBLIC_API_URI,
       headers: {
         cookie,
       },
     });
+    // console.log(apiWithCookies, "apiWithCookies");
 
     const response = await apiWithCookies.get<Product[]>(
       API_ENDPOINTS.getallproducts
