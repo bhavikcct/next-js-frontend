@@ -2,16 +2,23 @@ version: "3.9"
 
 services:
   nextjs-app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: nextjs-app
     ports:
-      - "5001:5001"
+      - "5001:3000"
     environment:
-      NODE_ENV: development
-      PORT: 5001
+      - NODE_ENV=development
     volumes:
-      - .:/app          
-    stdin_open: true
-    tty: true
-    command: npm run dev
-    restart: unless-stopped
+      - .:/app
+      - /app/node_modules
+    dns:
+      - 8.8.8.8 
+    networks:
+      - nextjs-network
+
+networks:
+  nextjs-network:
+    driver: bridge
+    external: true 

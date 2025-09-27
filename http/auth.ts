@@ -26,7 +26,7 @@ export const registerUser = async ({
 }: RegisterUserParams): Promise<RegisterUserResponse> => {
     try {
         const [API_ENDPOINT] = queryKey;
-        const response = await (await api).post<RegisterUserResponse>(API_ENDPOINT, payload);
+        const response = await  api.post<RegisterUserResponse>(API_ENDPOINT, payload);
         toast.success(response.data.message || "Registration successful");
         return response.data;
     } catch (error: any) {
@@ -44,7 +44,7 @@ export const loginuser = async ({
 }: LoginUserParams): Promise<LoginUserResponse> => {
     try {
         const [API_ENDPOINT] = queryKey;
-        const response = await (await api).post<LoginUserResponse>(API_ENDPOINT, payload);
+        const response = await  api.post<LoginUserResponse>(API_ENDPOINT, payload);
         toast
             .success('Login SuccessFull')
         return response.data;

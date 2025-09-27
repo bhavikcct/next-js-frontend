@@ -1,17 +1,17 @@
 import { api } from "@/lib/api";
 import { API_ENDPOINTS } from "@/lib/api-endpoint";
-import { BASE_URL } from "@/lib/baseurl";
 import {
   CreateProductFormValues,
   EditProductFormValues,
 } from "@/schema/product";
-import { Product } from "@/types/products.type";
+import { ApiResponse, Product } from "@/types/products.type";
 import axios from "axios";
 import { toast } from "sonner";
 
 
 export async function getAllProducts(
-  requestHeaders: Headers
+  requestHeaders: Headers,
+  search: string = ""
 ): Promise<Product[]> {
   try {
     const cookie = requestHeaders.get("cookie") || "";
@@ -19,23 +19,26 @@ export async function getAllProducts(
     console.log(cookie, "cookie");
 
     const apiWithCookies =  axios.create({
-      baseURL: BASE_URL.NEXT_PUBLIC_API_URI,
+      baseURL:"http://localhost:3030",
       headers: {
         cookie,
       },
+      params:{
+        search:search
+      }
     });
 
     console.log(apiWithCookies, "apiWithCookies");
 
-    const response = await apiWithCookies.get<Product[]>(
+    const response = await apiWithCookies.get<ApiResponse<Product[]>>(
       API_ENDPOINTS.getallproducts
     );
     // console.log(response,"response");
-    return response.data;
+    return response.data.data;
   } catch (error: any) {
     console.log(error, "error");
     console.error("Failed to fetch products:", error.message);
-    return [];
+    return []
   }
 }
 
@@ -104,16 +107,16 @@ export async function getProductById(
     const cookie = requestHeaders.get("cookie") || "";
 
     const apiWithCookies = axios.create({
-      baseURL: BASE_URL.NEXT_PUBLIC_API_URI,
+      baseURL: "http://localhost:3030",
       headers: {
         cookie,
       },
     });
 
-    const response = await apiWithCookies.get<Product>(
+    const response = await apiWithCookies.get<ApiResponse<Product>>(
       API_ENDPOINTS.getproductbyid(id)
     );
-    return response.data;
+    return response.data.data;
   } catch (error: any) {
     console.error("Failed to fetch product by ID:", error.message);
     return null;

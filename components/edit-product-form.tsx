@@ -21,14 +21,14 @@ import { useRouter } from "next/navigation";
 import { editProduct } from "@/http/products";
 import { Product } from "@/types/products.type";
 
-export const EditProductForm = ({ task }: { task: Product }) => {
+export const EditProductForm = ({ product }: { product: Product }) => {
   const router = useRouter();
   const form = useForm<EditProductFormValues>({
     resolver: zodResolver(editproductSchema),
     defaultValues: {
-      description: task.description,
-      price: task.price,
-      productName: task.name,
+      description: product?.description,
+      price: product?.price,
+      productName: product?.productName,
     },
   });
 
@@ -42,7 +42,7 @@ export const EditProductForm = ({ task }: { task: Product }) => {
 
   const onSubmit = async (data: EditProductFormValues) => {
     await mutateAsync({
-      queryKey: [API_ENDPOINTS.editproduct(String(task.id))],
+      queryKey: [API_ENDPOINTS.editproduct(String(product.id))],
       payload: data,
     });
   };
@@ -51,7 +51,7 @@ export const EditProductForm = ({ task }: { task: Product }) => {
     <div className="flex justify-center items-center min-h-screen">
       <Card className="w-full max-w-lg">
         <CardHeader>
-          <CardTitle className="text-center">Edit New Task</CardTitle>
+          <CardTitle className="text-center">Edit Product</CardTitle>
         </CardHeader>
         <CardContent>
           <Form {...form}>
@@ -64,14 +64,14 @@ export const EditProductForm = ({ task }: { task: Product }) => {
                     <FormLabel>Product Name</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Task Title"
+                        placeholder="Product Name"
                         {...field}
                         aria-invalid={
                           form.formState.errors.productName ? "true" : "false"
                         }
                       />
                     </FormControl>
-                    <FormDescription>Enter the task's title.</FormDescription>
+                    <FormDescription>Enter the product name.</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -85,7 +85,7 @@ export const EditProductForm = ({ task }: { task: Product }) => {
                     <FormLabel>Description</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Task Description"
+                        placeholder="Product Description"
                         {...field}
                         aria-invalid={
                           form.formState.errors.description ? "true" : "false"
@@ -93,37 +93,35 @@ export const EditProductForm = ({ task }: { task: Product }) => {
                       />
                     </FormControl>
                     <FormDescription>
-                      Provide a brief description of the task.
+                      Provide a brief description of the product.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-
-              <div className="grid grid-cols-2 gap-4">
-                <FormField
-                  control={form.control}
-                  name="description"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Description</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="Task Description"
-                          {...field}
-                          aria-invalid={
-                            form.formState.errors.description ? "true" : "false"
-                          }
-                        />
-                      </FormControl>
-                      <FormDescription>
-                        Provide a brief description of the task.
-                      </FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
+              <FormField
+                control={form.control}
+                name="price"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Price</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        placeholder="Product Price"
+                        {...field}
+                        aria-invalid={
+                          form.formState.errors.price ? "true" : "false"
+                        }
+                      />
+                    </FormControl>
+                    <FormDescription>
+                      Enter the price of the product.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
               <Button
                 type="submit"
@@ -133,7 +131,7 @@ export const EditProductForm = ({ task }: { task: Product }) => {
                 {isPending ? (
                   <Loader className="h-4 w-4 animate-spin" />
                 ) : (
-                  "Edit Task"
+                  "Edit Product"
                 )}
               </Button>
             </form>

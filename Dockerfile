@@ -1,14 +1,12 @@
-FROM node:20-alpine
+FROM node:20-slim
 
 WORKDIR /app
 
-COPY package.json package-lock.json* ./
-RUN npm install
+COPY package*.json ./
+RUN npm install --legacy-peer-deps
 
 COPY . .
 
 EXPOSE 5001
-
-ENV PORT=5001
 
 CMD ["npm", "run", "dev"]

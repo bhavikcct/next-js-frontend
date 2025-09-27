@@ -1,7 +1,13 @@
+export interface ApiResponse<T> {
+  message: string;
+  data: T;
+}
+
+
 export interface Product {
-    id: number;
+     id: number;
     description: string;
-    name: string;
+    productName: string;
     price: number;
+   
   }
-  
