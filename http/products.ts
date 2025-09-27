@@ -19,7 +19,7 @@ export async function getAllProducts(
     console.log(cookie, "cookie");
 
     const apiWithCookies =  axios.create({
-      baseURL:"http://localhost:3030",
+      baseURL:process.env.API_URI,
       headers: {
         cookie,
       },
@@ -51,9 +51,9 @@ export const createProduct = async ({
 }): Promise<Product> => {
   try {
     const [API_ENDPOINT] = queryKey;
-    const response = await api.post<Product>(API_ENDPOINT, payload);
+    const response = await api.post<ApiResponse<Product>>(API_ENDPOINT, payload);
     toast.success("Product Created");
-    return response.data;
+    return response.data.data;
   } catch (error: any) {
     const message =
       error?.response?.data?.message || "Failed to create product.";
@@ -71,9 +71,9 @@ export const editProduct = async ({
 }): Promise<Product> => {
   try {
     const [API_ENDPOINT] = queryKey;
-    const response = await api.put<Product>(API_ENDPOINT, payload);
+    const response = await api.put<ApiResponse<Product>>(API_ENDPOINT, payload);
     toast.success("Product Edited Successfully");
-    return response.data;
+    return response.data.data;
   } catch (error: any) {
     const message = error?.response?.data?.message || "Failed to edit product.";
     toast.error(message);
@@ -107,7 +107,7 @@ export async function getProductById(
     const cookie = requestHeaders.get("cookie") || "";
 
     const apiWithCookies = axios.create({
-      baseURL: "http://localhost:3030",
+      baseURL: process.env.API_URI,
       headers: {
         cookie,
       },

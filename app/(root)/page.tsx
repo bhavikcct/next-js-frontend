@@ -8,11 +8,12 @@ import Link from "next/link";
 export default async function Home({
   searchParams,
 }: {
-  searchParams?: { search?: string };
+  searchParams?:Promise<{ search?: string }>;
 }) {
   const headersInstance = await headers();
-  const search = searchParams?.search || "";
-  const products = await getAllProducts(headersInstance, search);
+  const params = searchParams ? await searchParams : {};
+  const search = params.search || "";
+  const products = await getAllProducts(headersInstance, search); 
 
   return (
     <div className="m-4 sm:m-6 lg:m-8 p-4 sm:p-6 lg:p-8 space-y-4">

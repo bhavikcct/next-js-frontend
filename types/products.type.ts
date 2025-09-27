@@ -3,11 +3,9 @@ export interface ApiResponse<T> {
   data: T;
 }
 
-
 export interface Product {
-     id: number;
-    description: string;
-    productName: string;
-    price: number;
-   
-  }
+  id: number;
+  description: string;
+  productName: string;
+  price: number;
+}
